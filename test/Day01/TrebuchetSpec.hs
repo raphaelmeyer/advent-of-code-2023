@@ -17,5 +17,8 @@ exampleInput =
 spec :: Spec
 spec = do
   describe "Trebuchet" $ do
-    it "should ..." $ do
-      Trebuchet.partOne exampleInput `shouldBe` (142 :: Int)
+    it "should calculate the sum of calibration values" $ do
+      Trebuchet.partOne exampleInput `shouldBe` "142"
+
+    it "should recover calibration values" $ do
+      map Trebuchet.recoverValue exampleInput `shouldBe` [12, 38, 15, 77]
