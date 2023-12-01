@@ -1,0 +1,51 @@
+cabal-version: 3.6
+name: advent-of-code
+version: 0.1.0.0
+
+extra-source-files:
+    README.md
+
+common common-properties
+    default-language: Haskell2010
+    ghc-options:
+        -Wall -Werror -O2
+    build-depends:
+        base,
+        containers,
+        extra,
+        mtl,
+        split,
+        text,
+        vector
+
+executable aoc
+    import: common-properties
+    main-is: Main.hs
+    hs-source-dirs: app/AoC
+    build-depends:
+        advent-of-code,
+        optparse-applicative
+
+library
+    import: common-properties
+    exposed-modules:
+        AoC.Puzzle,
+        Day01.Trebuchet,
+
+    hs-source-dirs: src
+    build-depends:
+        megaparsec
+
+test-suite test
+    import: common-properties
+    type: exitcode-stdio-1.0
+    main-is: Spec.hs
+    other-modules:
+        Day01.TrebuchetSpec,
+    hs-source-dirs: test
+    build-depends:
+        advent-of-code,
+        hspec
+    build-tool-depends:
+        hspec-discover:hspec-discover
+
