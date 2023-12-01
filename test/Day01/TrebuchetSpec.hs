@@ -14,6 +14,17 @@ exampleInput =
     "treb7uchet"
   ]
 
+exampleTwo :: [Text.Text]
+exampleTwo =
+  [ "two1nine",
+    "eightwothree",
+    "abcone2threexyz",
+    "xtwone3four",
+    "4nineeightseven2",
+    "zoneight234",
+    "7pqrstsixteen"
+  ]
+
 spec :: Spec
 spec = do
   describe "Trebuchet" $ do
@@ -22,3 +33,9 @@ spec = do
 
     it "should recover calibration values" $ do
       map Trebuchet.recoverValue exampleInput `shouldBe` [12, 38, 15, 77]
+
+    it "should calculate the sum of the real calibration values" $ do
+      Trebuchet.partTwo exampleTwo `shouldBe` "281"
+
+    it "should recover the real calibration values" $ do
+      map Trebuchet.recoverRealValue exampleTwo `shouldBe` [29, 83, 13, 24, 42, 14, 76]
