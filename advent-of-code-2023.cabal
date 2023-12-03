@@ -31,6 +31,7 @@ library
     exposed-modules:
         AoC.Puzzle,
         Day01.Trebuchet,
+        Day02.CubeConundrum,
 
     hs-source-dirs: src
     build-depends:
@@ -42,6 +43,7 @@ test-suite test
     main-is: Spec.hs
     other-modules:
         Day01.TrebuchetSpec,
+        Day02.CubeConundrumSpec,
     hs-source-dirs: test
     build-depends:
         advent-of-code,

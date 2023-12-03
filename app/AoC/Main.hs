@@ -6,6 +6,7 @@ import qualified AoC.Puzzle as Puzzle
 import Control.Applicative ((<**>))
 import qualified Control.Applicative as Applicative
 import qualified Day01.Trebuchet as Day01
+import qualified Day02.CubeConundrum as Day02
 import qualified Options.Applicative as Opt
 
 newtype Options = Options {getDay :: Maybe Int} deriving (Show)
@@ -14,7 +15,10 @@ options :: Opt.Parser Options
 options = Options <$> Applicative.optional (Opt.option Opt.auto $ Opt.long "day" <> Opt.help "run solution of a single day" <> Opt.metavar "DAY")
 
 solutions :: [(Puzzle.Solver, String)]
-solutions = [(Day01.solver, "data/day-01.txt")]
+solutions =
+  [ (Day01.solver, "data/day-01.txt"),
+    (Day02.solver, "data/day-02.txt")
+  ]
 
 year :: String
 year = "2022"
