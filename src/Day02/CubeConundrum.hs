@@ -5,6 +5,7 @@ module Day02.CubeConundrum where
 import qualified AoC.Puzzle as Puzzle
 import Control.Applicative (Alternative ((<|>)))
 import qualified Data.Map.Strict as Map
+import qualified Data.Maybe as Maybe
 import qualified Data.Text as Text
 import Data.Tuple.Extra ((&&&))
 import Data.Void (Void)
@@ -24,13 +25,15 @@ partOne :: [Game] -> String
 partOne = show . sum . map getId . filter possibleGame
 
 partTwo :: [Game] -> String
-partTwo _ = ""
+partTwo = show . sum . map minimumPower
 
 data Cube = Red | Green | Blue deriving (Eq, Ord, Show)
 
 type Hand = Map.Map Cube Int
 
 data Game = Game {getId :: Int, getReveals :: [Hand]} deriving (Eq, Show)
+
+-- part one
 
 constraints :: Hand
 constraints = Map.fromList [(Red, 12), (Green, 13), (Blue, 14)]
@@ -45,6 +48,14 @@ possible :: Hand -> Cube -> Bool
 possible hand cube = case (Map.lookup cube constraints, Map.lookup cube hand) of
   (Just c, Just h) -> h <= c
   _ -> True
+
+-- part two
+
+minimumPower :: Game -> Int
+minimumPower game = product . map (`minimumCube` game) $ [Red, Green, Blue]
+
+minimumCube :: Cube -> Game -> Int
+minimumCube cube = maximum . Maybe.mapMaybe (Map.lookup cube) . getReveals
 
 -- parse Input
 

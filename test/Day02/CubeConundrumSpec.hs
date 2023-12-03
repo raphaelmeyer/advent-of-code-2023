@@ -42,3 +42,10 @@ spec = do
 
       let impossible = input !! 2
       impossible `shouldNotSatisfy` Cube.possibleGame
+
+    it "should sum power of minimum sets" $ do
+      Cube.partTwo input `shouldBe` "2286"
+
+    it "should calculate the power of minimum sets" $ do
+      Cube.minimumPower (input !! 2) `shouldBe` 1560
+      Cube.minimumPower (input !! 4) `shouldBe` 36
